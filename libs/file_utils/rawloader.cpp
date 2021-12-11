@@ -1,6 +1,7 @@
 #include "rawloader.h"
 
 #include <cerrno>
+typedef int errno_t;
 
 #define fopen_s(pFile,filename,mode) ((*(pFile))=fopen((filename),(mode)))==NULL
 

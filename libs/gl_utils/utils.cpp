@@ -150,18 +150,8 @@ namespace gl
           in.read(&contents[0], contents.size());
           in.close();
 
-          // UTF-8 to wstring
-          std::wstring_convert<std::codecvt_utf8<wchar_t>> wconv;
-          std::wstring wstr = wconv.from_bytes(contents.c_str());
-          
-          // wstring to string
-          char* result = (char*) malloc (sizeof (char)* (wstr.size() + 1));
-//          std::use_facet<std::ctype<wchar_t>>(std::locale(".1252")).narrow(wstr.data(), wstr.data() + wstr.size(), ' ', result);
-
-          auto result_str = wconv.to_bytes(wstr);
-          std::strcpy(result, result_str.c_str());
-
-          result[wstr.size()] = '\0';
+          char* result = (char*) malloc (sizeof (char)* (contents.size() + 1));
+          std::strcpy(result, contents.c_str());
 
           return result;
       }

@@ -13,6 +13,8 @@
 #include <cstring>
 #include <cerrno>
 
+typedef int errno_t;
+
 #define DDS_MAXSTR (256)
 
 #define DDS_BLOCKSIZE (1<<20)

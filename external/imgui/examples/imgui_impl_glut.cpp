@@ -25,8 +25,7 @@
 #include "imgui.h"
 #include "imgui_impl_glut.h"
 #ifdef __APPLE__
-//    #include <GLUT/glut.h>
-    #include <GL/freeglut.h>
+    #include <GLUT/glut.h>
 #else
     #include <GL/freeglut.h>
 #endif

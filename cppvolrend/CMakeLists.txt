@@ -7,7 +7,6 @@ include_directories(${CMAKE_SOURCE_DIR}/external/imgui/examples)
 #message(${CMAKE_SOURCE_DIR})
 link_directories(${CMAKE_LIBRARY_OUTPUT_DIRECTORY})
 link_directories(${CMAKE_SOURCE_DIR}/lib/im_3_12)
-link_directories(/usr/local/Cellar/freeglut/3.2.1_1/lib)
 
 add_definitions(-DCMAKE_PATH_OUTPUT_DIR=${CMAKE_LIBRARY_OUTPUT_DIRECTORY})
 
@@ -66,8 +65,8 @@ add_executable(cppvolrend
                ${CMAKE_EXTERNAL_DIRECTORY}/imgui/examples/imgui_impl_opengl3.h ${CMAKE_EXTERNAL_DIRECTORY}/imgui/examples/imgui_impl_opengl3.cpp
                )
 
+set(OpenGL_GL_PREFERENCE GLVND)
 find_package(OpenGL REQUIRED)
-link_directories(${OPENGL_gl_LIBRARY})
 
 find_package(GLUT REQUIRED)
 find_package(GLEW REQUIRED)
@@ -76,11 +75,8 @@ find_package(TIFF REQUIRED)
 find_package(PNG REQUIRED)
 
 # . Debug
-target_link_libraries(cppvolrend debug ${OPENGL_gl_LIBRARY})
-#target_link_libraries(cppvolrend debug ${GLUT_LIBRARY})
-target_link_libraries(cppvolrend debug glut)
-#target_link_libraries(cppvolrend debug glfw/debug/glfw3)
-#target_link_libraries(cppvolrend debug glew/glew32s)
+target_link_libraries(cppvolrend debug ${OPENGL_opengl_LIBRARY})
+target_link_libraries(cppvolrend debug ${GLUT_LIBRARY})
 target_link_libraries(cppvolrend debug GLEW::GLEW)
 target_link_libraries(cppvolrend debug glfw)
 target_link_libraries(cppvolrend debug file_utils)
@@ -92,22 +88,6 @@ target_link_libraries(cppvolrend debug im)
 target_link_libraries(cppvolrend debug TIFF::TIFF)
 target_link_libraries(cppvolrend debug PNG::PNG)
 
-set(platform_libs
-        iconv
-        "-framework CoreAudio"
-        "-framework CoreAudioKit"
-        "-framework AudioToolbox"
-        "-framework AudioUnit"
-        "-framework CoreVideo"
-        "-framework CoreFoundation"
-        "-framework CoreDisplay"
-        "-framework CoreGraphics"
-        "-framework ForceFeedback"
-        "-framework Cocoa"
-        "-framework Carbon"
-        "-framework IOKit")
-target_link_libraries(cppvolrend debug
-        ${platform_libs})
 # . Release
 #target_link_libraries(cppvolrend optimized ${OPENGL_gl_LIBRARY})
 #target_link_libraries(cppvolrend optimized freeglut/freeglut)
@@ -127,6 +107,7 @@ add_dependencies(cppvolrend gl_utils)
 add_dependencies(cppvolrend math_utils)
 add_dependencies(cppvolrend vis_utils)
 add_dependencies(cppvolrend volvis_utils)
+
 # . Debug
 #file(COPY "${CMAKE_SOURCE_DIR}/lib/glew/glew32.dll" DESTINATION "${CMAKE_SOURCE_DIR}/bin/Debug")
 #file(COPY "${CMAKE_SOURCE_DIR}/lib/freeglut/freeglut.dll" DESTINATION "${CMAKE_SOURCE_DIR}/bin/Debug")

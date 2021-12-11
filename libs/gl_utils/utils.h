@@ -13,6 +13,8 @@
 
 #include <glm/glm.hpp>
 
+typedef int errno_t;
+
 namespace gl
 {
   typedef struct Vertex

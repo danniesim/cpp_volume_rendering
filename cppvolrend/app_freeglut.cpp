@@ -2,7 +2,6 @@
 #ifdef USING_FREEGLUT
 
 #include "renderingmanager.h"
-//#include <GL/wglew.h>
 #include <GL/glew.h>
 
 void ApplicationFreeGLUT::glutSwapBuffer (void* data)
@@ -111,8 +110,6 @@ bool ApplicationFreeGLUT::Init (int argc, char** argv)
   glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS);
 #endif
   glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH | GLUT_STENCIL | GLUT_ALPHA);
-    glutInitContextProfile(GLUT_COMPATIBILITY_PROFILE);
-    glutInitContextVersion(3,1);
 
   glutInitWindowSize(RenderingManager::Instance()->GetScreenWidth(),
                      RenderingManager::Instance()->GetScreenHeight());

@@ -1,5 +1,6 @@
 #include "stackmatrix.h"
 
+#include <cstdio>
 #include <glm/gtc/type_ptr.hpp>
 
 namespace gl
@@ -43,7 +44,7 @@ namespace gl
     }
     glm::mat4 stack_m = current_stack->top();
     current_stack->pop();
-    //é na ordem contrária da aplicação a multiplicação das matrizes
+    //ï¿½ na ordem contrï¿½ria da aplicaï¿½ï¿½o a multiplicaï¿½ï¿½o das matrizes
     if (rightmultiplication)
       current_stack->push(stack_m * m);
     else
