@@ -6,6 +6,8 @@
 #include <locale>
 #include <fstream>
 
+#define fopen_s(pFile,filename,mode) ((*(pFile))=fopen((filename),(mode)))==NULL
+
 namespace gl
 {
   void ExitOnGLError(const char* error_message)
@@ -154,7 +156,11 @@ namespace gl
           
           // wstring to string
           char* result = (char*) malloc (sizeof (char)* (wstr.size() + 1));
-          std::use_facet<std::ctype<wchar_t>>(std::locale(".1252")).narrow(wstr.data(), wstr.data() + wstr.size(), ' ', result);
+//          std::use_facet<std::ctype<wchar_t>>(std::locale(".1252")).narrow(wstr.data(), wstr.data() + wstr.size(), ' ', result);
+
+          auto result_str = wconv.to_bytes(wstr);
+          std::strcpy(result, result_str.c_str());
+
           result[wstr.size()] = '\0';
 
           return result;

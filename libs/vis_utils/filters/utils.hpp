@@ -53,13 +53,13 @@ namespace vis
       return x > 2.0f ? 0.0f : x > 1.0f ? p.k0(2.0f - x) : p.k1(1.0f - x);
     }
     void accumulate_buffer(float fu, float u) override final {
-      b[0] += fu * p.k3(u);
-      b[1] += fu * p.k2(u);
-      b[2] += fu * p.k1(u);
-      b[3] += fu * p.k0(u);
+      KernelBase<4, T>::b[0] += fu * p.k3(u);
+      KernelBase<4, T>::b[1] += fu * p.k2(u);
+      KernelBase<4, T>::b[2] += fu * p.k1(u);
+      KernelBase<4, T>::b[3] += fu * p.k0(u);
     }
     T sample_buffer(float u) const override final {
-      return b[0] * p.k3(u) + b[1] * p.k2(u) + b[2] * p.k1(u) + b[3] * p.k0(u);
+      return KernelBase<4, T>::b[0] * p.k3(u) + KernelBase<4, T>::b[1] * p.k2(u) + KernelBase<4, T>::b[2] * p.k1(u) + KernelBase<4, T>::b[3] * p.k0(u);
     }
   private:
     Pieces p; // Polynomial pieces of kernel (k0:[-2,-1], k1:[-1,0], k2:[0,1], k3:[1,2]

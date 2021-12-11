@@ -14,8 +14,8 @@ http://apprize.info/programming/opengl_1/12.html
 http://www.sunsetlakesoftware.com/2013/10/21/optimizing-gaussian-blurs-mobile-gpu
 
 Texture clamping behaviors:
-– Clamp to border color using vec4(0)
-– Clamp to Edge using black border around the texture
+ï¿½ Clamp to border color using vec4(0)
+ï¿½ Clamp to Edge using black border around the texture
 
 Special attention: elements out of the upper or left boundary are assumed to evaluate to zero, while elements
 out of the bottom or right boundary should be redirected back to the closest element at the respective
@@ -35,8 +35,8 @@ the SAT at non-integer locations if necessary.
 #include <gl_utils/texture3d.h>
 
 // Using OpenMP to increase the speed of SAT computation
-#define USE_OMP
-#include <omp.h>
+//#define USE_OMP
+//#include <omp.h>
 
 namespace vis
 {

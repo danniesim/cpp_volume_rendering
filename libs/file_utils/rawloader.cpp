@@ -2,6 +2,8 @@
 
 #include <cerrno>
 
+#define fopen_s(pFile,filename,mode) ((*(pFile))=fopen((filename),(mode)))==NULL
+
 IRAWLoader::IRAWLoader (std::string filename, size_t bytes_per_pixel, size_t num_voxels, size_t type_size)
 {
   m_data = NULL;

@@ -20,6 +20,9 @@
 
 #define DDS_RL (7)
 
+#define sscanf_s sscanf
+#define fopen_s(pFile,filename,mode) ((*(pFile))=fopen((filename),(mode)))==NULL
+
 Pvm::Pvm (const char *file_name)
 {
   std::string filename(file_name);

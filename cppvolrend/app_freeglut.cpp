@@ -2,7 +2,8 @@
 #ifdef USING_FREEGLUT
 
 #include "renderingmanager.h"
-#include <GL/wglew.h>
+//#include <GL/wglew.h>
+#include <GL/glew.h>
 
 void ApplicationFreeGLUT::glutSwapBuffer (void* data)
 {
@@ -105,14 +106,18 @@ ApplicationFreeGLUT::~ApplicationFreeGLUT ()
 bool ApplicationFreeGLUT::Init (int argc, char** argv)
 {
   glutInit(&argc, argv);
+
 #ifdef __FREEGLUT_EXT_H__
   glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS);
 #endif
   glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH | GLUT_STENCIL | GLUT_ALPHA);
+    glutInitContextProfile(GLUT_COMPATIBILITY_PROFILE);
+    glutInitContextVersion(3,1);
 
   glutInitWindowSize(RenderingManager::Instance()->GetScreenWidth(),
                      RenderingManager::Instance()->GetScreenHeight());
   glutCreateWindow("CppVolRend [FreeGLUT]");
+
 
   if (glewInit() != GLEW_OK)
   {
@@ -141,8 +146,8 @@ bool ApplicationFreeGLUT::Init (int argc, char** argv)
   RenderingManager::Instance()->f_swapbuffer = ApplicationFreeGLUT::glutSwapBuffer;
   
   // VSYNC
-  if (wglGetSwapIntervalEXT() > 0)
-    wglSwapIntervalEXT(1);
+//  if (wglGetSwapIntervalEXT() > 0)
+//    wglSwapIntervalEXT(1);
 
   return true;
 }
